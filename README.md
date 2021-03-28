@@ -1,1 +1,1 @@
-# EPUB Web API
+# EPUB Web Library (API)
