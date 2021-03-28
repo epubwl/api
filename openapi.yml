@@ -1,0 +1,125 @@
+openapi: 3.0.0
+info:
+  title: Epub Web Library
+  description: Managing epub libraries on the web
+  version: 1.0.0
+tags:
+  - name: User
+    description: User operations
+paths:
+  /api/users:
+    post:
+      tags:
+        - User
+      summary: Register a new user
+      requestBody:
+        $ref: '#/components/requestBodies/userCredentials'
+      responses:
+        '200':
+          $ref: '#/components/responses/token'
+        '400':
+          $ref: '#/components/responses/badRequest'
+  /api/users/login:
+    post:
+      tags:
+        - User
+      summary: Log user in
+      requestBody:
+        $ref: '#/components/requestBodies/userCredentials'
+      responses:
+        '200':
+          $ref: '#/components/responses/token'
+        '400':
+          $ref: '#/components/responses/badRequest'
+  /api/users/passwordchange:
+    post:
+      tags:
+        - User
+      summary: Change password for user
+      security:
+        - JWT: []
+      requestBody:
+        $ref: '#/components/requestBodies/passwordChange'
+      responses:
+        '200':
+          $ref: '#/components/responses/success'
+        '400':
+          $ref: '#/components/responses/badRequest'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+components:
+  schemas:
+    passwordChange:
+      properties:
+        currentPassword:
+          type: string
+        newPassword:
+          type: string
+      required:
+        - currentPassword
+        - newPassword
+    token:
+      properties:
+        token:
+          type: string
+      required:
+        - token
+    userCredentials:
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      required:
+        - username
+        - password
+  requestBodies:
+    passwordChange:
+      required: true
+      description: Password change request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/passwordChange'
+          examples:
+            passwordChange:
+              summary: A password change
+              value:
+                currentPassword: password
+                newPassword: 1Pa$sword
+    userCredentials:
+      required: true
+      description: User credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/userCredentials'
+          examples:
+            userCredentials:
+              summary: A user
+              value:
+                username: user
+                password: secretpassword
+  responses:
+    badRequest:
+      description: Bad Request
+    success:
+      description: Success
+    token:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/token'
+          examples:
+            jwt:
+              summary: A JSON web token
+              value:
+                token: Header.Payload.Signature
+    unauthorized:
+      description: Unauthorized
+  securitySchemes:
+    JWT:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
