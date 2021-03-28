@@ -68,6 +68,7 @@ paths:
 components:
   schemas:
     epubMetadata:
+      type: object
       properties:
         epubId:
           type: integer
@@ -138,6 +139,7 @@ components:
         - title
         - type
     passwordChange:
+      type: object
       properties:
         currentPassword:
           type: string
@@ -147,12 +149,14 @@ components:
         - currentPassword
         - newPassword
     token:
+      type: object
       properties:
         token:
           type: string
       required:
         - token
     userCredentials:
+      type: object
       properties:
         username:
           type: string
