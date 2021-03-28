@@ -43,7 +43,7 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/passwordChange'
       responses:
-        '200':
+        '204':
           $ref: '#/components/responses/success'
         '400':
           $ref: '#/components/responses/badRequest'
