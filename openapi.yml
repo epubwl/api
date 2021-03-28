@@ -71,53 +71,70 @@ components:
       type: object
       properties:
         epubId:
+          description: Id of the EPUB
           type: integer
         owner:
+          description: Owner of the EPUB
           type: string
           nullable: true
         contributors:
+          description: The contributor property is used to represent the name of a person, organization, etc. that played a secondary role in the creation of the content of an EPUB Publication.
           type: string
           nullable: true
         coverage:
+          description: The spatial or temporal topic of the resource, spatial applicability of the resource, or jurisdiction under which the resource is relevant.
           type: string
           nullable: true
         creators:
+          description: The creators property represents the names of people, organizations, etc. responsible for the creation of the content of the Rendition.
           type: string
           nullable: true
         date:
+          description: The date property MUST only be used to define the publication date of the EPUB Publication. The publication date is not the same as the last modified date (the last time the Rendition was changed).
           type: string
           nullable: true
         description:
+          description: An account of the resource.
           type: string
           nullable: true
         format:
+          description: The file format, physical medium, or dimensions of the resource.
           type: string
           nullable: true
         identifier:
+          description: The identifier property contains an identifier associated with the given Rendition, such as a UUID, DOI or ISBN.
           type: string
           nullable: true
         languages:
+          description: The languages property specifies the languages of the content of the given Rendition.
           type: string
           nullable: true
         publisher:
+          description: An entity responsible for making the resource available.
           type: string
           nullable: true
         relation:
+          description: A related resource.
           type: string
           nullable: true
         rights:
+          description: Information about rights held in and over the resource.
           type: string
           nullable: true
         source:
+          description: A related resource from which the described resource is derived.
           type: string
           nullable: true
         subject:
+          description: The subject property identifies the subject of the EPUB Publication.
           type: string
           nullable: true
         title:
+          description: The title property represents the name given to the EPUB Publication.
           type: string
           nullable: true
         type:
+          description: The type property is used to indicate that the given EPUB Publication is of a specialized type (e.g., annotations or a dictionary packaged in EPUB format).
           type: string
           nullable: true
       required:
