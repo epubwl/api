@@ -6,6 +6,8 @@ info:
 tags:
   - name: User
     description: User operations
+  - name: Library
+    description: Library operations
 paths:
   /api/users:
     post:
@@ -47,8 +49,94 @@ paths:
           $ref: '#/components/responses/badRequest'
         '401':
           $ref: '#/components/responses/unauthorized'
+  /api/epubs:
+    post:
+      tags:
+        - Library
+      summary: Upload a new epub
+      security:
+        - JWT: []
+      requestBody:
+        $ref: '#/components/requestBodies/epubFile'
+      responses:
+        '200':
+          $ref: '#/components/responses/epubMetadata'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '415':
+          $ref: '#/components/responses/unsupportedMediaType'
 components:
   schemas:
+    epubMetadata:
+      properties:
+        epubId:
+          type: integer
+        owner:
+          type: string
+          nullable: true
+        contributors:
+          type: string
+          nullable: true
+        coverage:
+          type: string
+          nullable: true
+        creators:
+          type: string
+          nullable: true
+        date:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        format:
+          type: string
+          nullable: true
+        identifier:
+          type: string
+          nullable: true
+        languages:
+          type: string
+          nullable: true
+        publisher:
+          type: string
+          nullable: true
+        relation:
+          type: string
+          nullable: true
+        rights:
+          type: string
+          nullable: true
+        source:
+          type: string
+          nullable: true
+        subject:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        type:
+          type: string
+          nullable: true
+      required:
+        - epubId
+        - owner
+        - contributors
+        - coverage
+        - creators
+        - date
+        - description
+        - format
+        - identifier
+        - languages
+        - publisher
+        - relation
+        - rights
+        - source
+        - subject
+        - title
+        - type
     passwordChange:
       properties:
         currentPassword:
@@ -74,6 +162,11 @@ components:
         - username
         - password
   requestBodies:
+    epubFile:
+      required: true
+      description: Epub file to upload
+      content:
+        application/epub+zip: {}
     passwordChange:
       required: true
       description: Password change request
@@ -103,6 +196,33 @@ components:
   responses:
     badRequest:
       description: Bad Request
+    epubMetadata:
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/epubMetadata'
+          examples:
+            nulls:
+              summary: Properties are null
+              value:
+                epubId: 1
+                owner: user
+                contributors: null
+                coverage: null
+                creators: null
+                date: null
+                description: null
+                format: null
+                identifier: null
+                languages: null
+                publisher: null
+                relation: null
+                rights: null
+                source: null
+                subject: null
+                title: null
+                type: null
     success:
       description: Success
     token:
@@ -118,6 +238,8 @@ components:
                 token: Header.Payload.Signature
     unauthorized:
       description: Unauthorized
+    unsupportedMediaType:
+      description: Unsupported Media Type
   securitySchemes:
     JWT:
       type: http
