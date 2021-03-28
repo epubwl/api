@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
-  title: Epub Web Library
-  description: Managing epub libraries on the web
+  title: EPUB Web Library
+  description: Managing EPUB libraries on the web
   version: 1.0.0
 tags:
   - name: User
@@ -53,7 +53,7 @@ paths:
     post:
       tags:
         - Library
-      summary: Upload a new epub
+      summary: Upload a new EPUB
       security:
         - JWT: []
       requestBody:
@@ -69,6 +69,7 @@ components:
   schemas:
     epubMetadata:
       type: object
+      description: EPUB metadata
       properties:
         epubId:
           description: Id of the EPUB
@@ -185,7 +186,7 @@ components:
   requestBodies:
     epubFile:
       required: true
-      description: Epub file to upload
+      description: EPUB file to upload
       content:
         application/epub+zip: {}
     passwordChange:
