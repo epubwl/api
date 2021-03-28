@@ -1,1 +1,1 @@
-# epub-wl-api
+# EPUB Web API
