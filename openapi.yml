@@ -21,6 +21,20 @@ paths:
           $ref: '#/components/responses/token'
         '400':
           $ref: '#/components/responses/badRequest'
+  /api/users/{username}:
+    delete:
+      tags:
+        - User
+      summary: Delete user
+      security:
+        - JWT: []
+      parameters:
+        - $ref: '#/components/parameters/username'
+      responses:
+        '204':
+          $ref: '#/components/responses/success'
+        '401':
+          $ref: '#/components/responses/unauthorized'
   /api/users/login:
     post:
       tags:
@@ -183,6 +197,14 @@ components:
       required:
         - username
         - password
+  parameters:
+    username:
+      required: true
+      in: path
+      name: username
+      schema:
+        type: string
+      description: The username
   requestBodies:
     epubFile:
       required: true
