@@ -136,7 +136,7 @@ paths:
     put:
       tags:
         - Library
-      summary: Replace EPUB metadata
+      summary: Replace metadata for EPUB
       security:
         - JWT: []
       requestBody:
