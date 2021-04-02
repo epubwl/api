@@ -93,6 +93,32 @@ paths:
           $ref: '#/components/responses/unauthorized'
         '404':
           $ref: '#/components/responses/notFound'
+    put:
+      tags:
+        - Library
+      summary: Replace EPUB file
+      security:
+        - JWT: []
+      responses:
+        '200':
+          $ref: '#/components/responses/epubMetadata'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '404':
+          $ref: '#/components/responses/notFound'
+    delete:
+      tags:
+        - Library
+      summary: Delete EPUB file
+      security:
+        - JWT: []
+      responses:
+        '200':
+          $ref: '#/components/responses/epubMetadata'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '404':
+          $ref: '#/components/responses/notFound'
 components:
   schemas:
     epubMetadata:
