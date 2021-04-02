@@ -119,6 +119,35 @@ paths:
           $ref: '#/components/responses/unauthorized'
         '404':
           $ref: '#/components/responses/notFound'
+  /api/epubs/metadata/{epubId}:
+    get:
+      tags:
+        - Library
+      summary: Get metadata for EPUB
+      security:
+        - JWT: []
+      responses:
+        '200':
+          $ref: '#/components/responses/epubMetadata'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '404':
+          $ref: '#/components/responses/notFound'
+    put:
+      tags:
+        - Library
+      summary: Replace EPUB metadata
+      security:
+        - JWT: []
+      requestBody:
+        $ref: '#/components/requestBodies/epubMetadata'
+      responses:
+        '200':
+          $ref: '#/components/responses/epubMetadata'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '404':
+          $ref: '#/components/responses/notFound'
 components:
   schemas:
     epubMetadata:
@@ -260,6 +289,35 @@ components:
           schema:
             type: string
             format: binary
+    epubMetadata:
+      required: true
+      description: EPUB metadata to update to
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/epubMetadata'
+          examples:
+            nulls:
+              summary: Properties are null
+              value:
+                epubId: 1
+                owner: user
+                tags: []
+                contributors: null
+                coverage: null
+                creators: null
+                date: null
+                description: null
+                format: null
+                identifier: null
+                languages: null
+                publisher: null
+                relation: null
+                rights: null
+                source: null
+                subject: null
+                title: null
+                type: null
     passwordChange:
       required: true
       description: Password change request
