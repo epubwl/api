@@ -148,6 +148,35 @@ paths:
           $ref: '#/components/responses/unauthorized'
         '404':
           $ref: '#/components/responses/notFound'
+  /api/epubs/cover/{epubId}:
+    get:
+      tags:
+        - Library
+      summary: Get cover for EPUB
+      security:
+        - JWT: []
+      responses:
+        '200':
+          $ref: '#/components/responses/epubCover'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '404':
+          $ref: '#/components/responses/notFound'
+    put:
+      tags:
+        - Library
+      summary: Replace cover for EPUB
+      security:
+        - JWT: []
+      requestBody:
+        $ref: '#/components/requestBodies/epubCover'
+      responses:
+        '204':
+          $ref: '#/components/responses/success'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '404':
+          $ref: '#/components/responses/notFound'
 components:
   schemas:
     epubMetadata:
@@ -281,6 +310,26 @@ components:
         type: string
       description: The username
   requestBodies:
+    epubCover:
+      required: true
+      description: EPUB cover to upload, see https://www.w3.org/publishing/epub3/epub-spec.html#tbl-core-media-types for supported media types
+      content:
+        image/gif:
+          schema:
+            type: string
+            format: binary
+        image/jpeg:
+          schema:
+            type: string
+            format: binary
+        image/png:
+          schema:
+            type: string
+            format: binary
+        image/svg+xml:
+          schema:
+            type: string
+            format: binary
     epubFile:
       required: true
       description: EPUB file to upload
@@ -347,6 +396,26 @@ components:
   responses:
     badRequest:
       description: Bad Request
+    epubCover:
+      required: true
+      description: Success
+      content:
+        image/gif:
+          schema:
+            type: string
+            format: binary
+        image/jpeg:
+          schema:
+            type: string
+            format: binary
+        image/png:
+          schema:
+            type: string
+            format: binary
+        image/svg+xml:
+          schema:
+            type: string
+            format: binary
     epubFile:
       required: true
       description: Success
